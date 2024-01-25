@@ -6,7 +6,7 @@ func RedisConn() *redis.Client {
 	client := redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "", // no password set
-		DB:       0,  
+		DB:       0, // default db 
 	})
 
 	return client
