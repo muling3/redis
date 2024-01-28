@@ -12,39 +12,39 @@ type StaticFile struct {
 }
 
 type Server struct {
-	App  *echo.Echo
+	app  *echo.Echo
 	addr string
 }
 
 func NewServer(app *echo.Echo, addr string) *Server {
 	return &Server{
-		App:  app,
+		app:  app,
 		addr: addr,
 	}
 }
 
 func (s *Server) Start() {
 	go log.Println("Application running on", s.addr)
-	s.App.Logger.Fatal(s.App.Start(s.addr))
+	s.app.Logger.Fatal(s.app.Start(s.addr))
 }
 
 func (s *Server) ServeStaticFiles(files []StaticFile) {
 	for _, file := range files {
-		s.App.File(file.Prefix, file.Filepath)
+		s.app.File(file.Prefix, file.Filepath)
 	}
 }
 
 func (s *Server) MakeHTTPHandler(path string, method string, handler echo.HandlerFunc) {
 	switch method {
 	case "GET":
-		s.App.GET(path, handler)
+		s.app.GET(path, handler)
 	case "POST":
-		s.App.POST(path, handler)
+		s.app.POST(path, handler)
 	case "PUT":
-		s.App.PUT(path, handler)
+		s.app.PUT(path, handler)
 	case "PATCH":
-		s.App.PATCH(path, handler)
+		s.app.PATCH(path, handler)
 	case "DELETE":
-		s.App.DELETE(path, handler)
+		s.app.DELETE(path, handler)
 	}
 }
