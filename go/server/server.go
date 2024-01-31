@@ -2,6 +2,7 @@ package server
 
 import (
 	"log"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
@@ -36,15 +37,15 @@ func (s *Server) ServeStaticFiles(files []StaticFile) {
 
 func (s *Server) MakeHTTPHandler(path string, method string, handler echo.HandlerFunc) {
 	switch method {
-	case "GET":
+	case http.MethodGet:
 		s.app.GET(path, handler)
-	case "POST":
+	case http.MethodPost:
 		s.app.POST(path, handler)
-	case "PUT":
+	case http.MethodPut:
 		s.app.PUT(path, handler)
-	case "PATCH":
+	case http.MethodPatch:
 		s.app.PATCH(path, handler)
-	case "DELETE":
+	case http.MethodDelete:
 		s.app.DELETE(path, handler)
 	}
 }

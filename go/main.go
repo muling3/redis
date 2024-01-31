@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"strings"
 
 	"github.com/labstack/echo/v4"
@@ -17,6 +18,9 @@ func (p Person) String() string {
 	return strings.Join([]string{p.Name, p.Gender}, " - ")
 }
 
+const (
+	
+)
 func main() {
 	// myChan := make(chan int, 1)
 	// myChan <- 12
@@ -90,7 +94,7 @@ func main() {
 	// static files
 	s.ServeStaticFiles(staticFiles)
 
-	s.MakeHTTPHandler("/login", "GET", handlers.Login)
+	s.MakeHTTPHandler("/login", http.MethodGet, handlers.Login)
 
 	s.Start()
 }
