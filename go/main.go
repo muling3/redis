@@ -18,9 +18,8 @@ func (p Person) String() string {
 	return strings.Join([]string{p.Name, p.Gender}, " - ")
 }
 
-const (
-	
-)
+const ()
+
 func main() {
 	// myChan := make(chan int, 1)
 	// myChan <- 12
@@ -95,6 +94,10 @@ func main() {
 	s.ServeStaticFiles(staticFiles)
 
 	s.MakeHTTPHandler("/login", http.MethodGet, handlers.Login)
+
+	s.MakeHTTPHandler("/smpl", http.MethodGet, func(c echo.Context) error {
+		return c.JSON(200, map[string]interface{}{"message": "Hello AIR"})
+	})
 
 	s.Start()
 }
